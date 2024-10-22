@@ -58,17 +58,21 @@ struct CategoryCard: View {
             print("\(categoryName) tapped")
         }) {
             VStack {
-                Image(categoryName)  // Add images later in future
+                Text(categoryName.uppercased())
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .padding(.bottom, 5)
+                Image(categoryName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 60)
                     .cornerRadius(8)
                     .clipped()
                 Text(description)
-                    .font(.headline)
+                    .font(.subheadline)
                     .foregroundColor(.white)
             }
-            .padding(.vertical)
+            .padding()
             .frame(maxWidth: .infinity)
             .background(LinearGradient(gradient: Gradient(colors: [Color.gray, Color.black]), startPoint: .top, endPoint: .bottom))
             .cornerRadius(10)
@@ -78,27 +82,8 @@ struct CategoryCard: View {
     }
 }
 
-struct TabBarButton: View {
-    var icon: String
-    var label: String
-    @Binding var selectedTab: String
 
-    var body: some View {
-        Button(action: {
-            selectedTab = label
-        }) {
-            VStack {
-                Image(systemName: icon)
-                    .font(.title2)
-                    .foregroundColor(selectedTab == label ? .green : .gray)
-                Text(label)
-                    .font(.caption)
-                    .foregroundColor(selectedTab == label ? .white : .gray)
-            }
-        }
-        .padding(.horizontal, 30)
-    }
-}
+
 
 
 
