@@ -5,7 +5,7 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-
+//Starting page after splash screen, calls for user input
 import SwiftUI
 
 struct UserInfoInputView: View {

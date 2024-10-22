@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct Beta_AppApp: App {
+    @StateObject private var userModel = UserModel()
+
     var body: some Scene {
         WindowGroup {
             SplashView()
+                .environmentObject(userModel)
         }
     }
 }
+
 

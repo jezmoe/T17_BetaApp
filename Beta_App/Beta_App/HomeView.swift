@@ -6,31 +6,48 @@
 //
 
 
+// Home View
 import SwiftUI
 
 struct HomeView: View {
     var firstName: String
     var lastName: String
+    @State private var selectedTab = "Home"
 
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("Welcome \(firstName) \(lastName) to Fitness Pro!")
-                    .font(.headline)
-                    .padding()
+        VStack {
+            ScrollView {
+                VStack {
+                    Text("Welcome \(firstName) \(lastName) to Fitness Pro!")
+                        .font(.headline)
+                        .padding()
 
-                VStack(spacing: 10) {
-                    CategoryCard(categoryName: "Beginner", description: "For beginners")
-                    CategoryCard(categoryName: "Athlete", description: "3-5 months of experience")
-                    CategoryCard(categoryName: "Bodybuilder", description: "1-2 years of experience")
-                    CategoryCard(categoryName: "Weekly Routine", description: "Beginner -2 years of experience")
-                    CategoryCard(categoryName: "Daily: Choose your Muscles", description: "Beginner - 2 Years of experience")
+                    VStack(spacing: 10) {
+                        CategoryCard(categoryName: "Beginner", description: "For beginners")
+                        CategoryCard(categoryName: "Athlete", description: "3-5 months of experience")
+                        CategoryCard(categoryName: "Bodybuilder", description: "1-2 years of experience")
+                        CategoryCard(categoryName: "Weekly Routine", description: "Beginner -2 years of experience")
+                        CategoryCard(categoryName: "Daily: Choose your Muscles", description: "Beginner - 2 Years of experience")
+                    }
                 }
             }
+
+            // Tab Bar
+            HStack {
+                Spacer()
+                TabBarButton(icon: "house.fill", label: "Home", selectedTab: $selectedTab)
+                Spacer()
+                TabBarButton(icon: "chart.bar", label: "Diet", selectedTab: $selectedTab)
+                Spacer()
+                TabBarButton(icon: "person.fill", label: "Profile", selectedTab: $selectedTab)
+                Spacer()
+            }
+            .frame(height: 50)
+            .background(Color.black.opacity(0.8))
+            .foregroundColor(.white)
         }
     }
 }
-
 
 struct CategoryCard: View {
     var categoryName: String
@@ -38,11 +55,10 @@ struct CategoryCard: View {
 
     var body: some View {
         Button(action: {
-            // Add action here for what happens when the button is tapped
             print("\(categoryName) tapped")
         }) {
             VStack {
-                Image(categoryName) // Make sure these images exist in your asset catalog
+                Image(categoryName)  // Add images later in future
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 60)
@@ -61,6 +77,30 @@ struct CategoryCard: View {
         .padding(.horizontal)
     }
 }
+
+struct TabBarButton: View {
+    var icon: String
+    var label: String
+    @Binding var selectedTab: String
+
+    var body: some View {
+        Button(action: {
+            selectedTab = label
+        }) {
+            VStack {
+                Image(systemName: icon)
+                    .font(.title2)
+                    .foregroundColor(selectedTab == label ? .green : .gray)
+                Text(label)
+                    .font(.caption)
+                    .foregroundColor(selectedTab == label ? .white : .gray)
+            }
+        }
+        .padding(.horizontal, 30)
+    }
+}
+
+
 
 
 
