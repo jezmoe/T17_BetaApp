@@ -5,34 +5,59 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-
+// Mini splash screen after continue button is pressed in the user input screen.
 import SwiftUI
 
 struct WelcomeSplashView: View {
     var firstName: String
     var lastName: String
-    @State private var isActive = false
-    
+    @State private var isActive = false 
+    @State private var hasAnimated = false
+
     var body: some View {
-        if isActive {
-            HomeView(firstName: firstName, lastName: lastName)
-        } else {
-            Text("Welcome \(firstName) \(lastName) to Fitness Pro!")
-                .foregroundColor(.white)
-                .background(Color.black)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                        withAnimation {
-                            self.isActive = true
+        VStack {
+            if isActive {
+                HomeView(firstName: firstName, lastName: lastName)
+            } else {
+                ZStack {
+                    Color.black.edgesIgnoringSafeArea(.all)
+
+                    // Animation
+                    Circle()
+                        .stroke(lineWidth: 2)
+                        .frame(width: 200, height: 200)
+                        .foregroundColor(.white)
+                        .rotationEffect(Angle(degrees: hasAnimated ? 360 : 0))
+                        .onAppear {
+                            withAnimation(Animation.linear(duration: 3.5).repeatForever(autoreverses: false)) {
+                                self.hasAnimated = true
+                            }
                         }
-                    }
+
+                    Text("Welcome \(firstName) \(lastName) to Fitness Pro!")
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .multilineTextAlignment(.center)
+                        .padding()
                 }
+            }
         }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                withAnimation {
+                    self.isActive = true
+                }
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
     }
 }
 
 struct WelcomeSplashView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeSplashView(firstName: "First Name", lastName: "Last Name")
+        WelcomeSplashView(firstName: "Jan", lastName: "Rubido")
     }
 }
+
+
