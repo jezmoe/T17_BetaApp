@@ -1,5 +1,5 @@
 //
-//  SplashView.swift
+//  WelcomeSplashView.swift
 //  Beta_App
 //
 //  Created by Jan Rubido on 10/21/24.
@@ -8,17 +8,18 @@
 
 import SwiftUI
 
-struct SplashView: View {
+struct WelcomeSplashView: View {
+    var firstName: String
+    var lastName: String
     @State private var isActive = false
     
     var body: some View {
         if isActive {
-            UserInfoInputView()
+            HomeView(firstName: firstName, lastName: lastName)
         } else {
-            Image("Splash")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .ignoresSafeArea()
+            Text("Welcome \(firstName) \(lastName) to Fitness Pro!")
+                .foregroundColor(.white)
+                .background(Color.black)
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         withAnimation {
@@ -30,9 +31,8 @@ struct SplashView: View {
     }
 }
 
-struct SplashView_Previews: PreviewProvider {
+struct WelcomeSplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView()
+        WelcomeSplashView(firstName: "First Name", lastName: "Last Name")
     }
 }
-
