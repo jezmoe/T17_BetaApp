@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var firstName: String = ""
-    @State private var lastName: String = ""
-    
     var body: some View {
-        HomeView(firstName: firstName, lastName: lastName)
+        CustomTabBar()  // Directly embedding the CustomTabBar
     }
 }
 
@@ -21,5 +18,6 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
 
 
