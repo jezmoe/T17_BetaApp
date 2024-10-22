@@ -8,37 +8,57 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var userModel: UserModel
     @State private var selectedTab = "Home"
 
     var body: some View {
         VStack {
             switch selectedTab {
             case "Home":
-                Text("Home Content")
+                HomeView(firstName: userModel.firstName, lastName: userModel.lastName)
             case "Diet":
-                Text("Diet Content")
+                DietView()
             case "Profile":
-                Text("Profile Content")
+                ProfileView()
             default:
-                Text("Home Content")
+                Text("Selection does not exist")
             }
+
             HStack {
                 TabBarButton(icon: "house.fill", label: "Home", selectedTab: $selectedTab)
                 TabBarButton(icon: "leaf.fill", label: "Diet", selectedTab: $selectedTab)
                 TabBarButton(icon: "person.fill", label: "Profile", selectedTab: $selectedTab)
             }
-            .frame(maxWidth: .infinity)
-            .padding()
+            .frame(height: 50)
             .background(Color.black.opacity(0.8))
+            .foregroundColor(.white)
         }
         .edgesIgnoringSafeArea(.bottom)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+struct TabBarButton: View {
+    var icon: String
+    var label: String
+    @Binding var selectedTab: String
+
+    var body: some View {
+        Button(action: {
+            selectedTab = label
+        }) {
+            VStack {
+                Image(systemName: icon)
+                    .font(.title2)
+                    .foregroundColor(selectedTab == label ? .green : .gray)
+                Text(label)
+                    .font(.caption)
+                    .foregroundColor(selectedTab == label ? .white : .gray)
+            }
+        }
+        .padding(.horizontal, 30)
     }
 }
+
+
 
 
