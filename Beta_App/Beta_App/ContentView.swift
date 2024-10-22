@@ -12,17 +12,23 @@ struct ContentView: View {
     @State private var selectedTab = "Home"
 
     var body: some View {
-        VStack {
-            switch selectedTab {
-            case "Home":
-                HomeView(firstName: userModel.firstName, lastName: userModel.lastName)
-            case "Diet":
-                DietView()
-            case "Profile":
-                ProfileView()
-            default:
-                Text("Selection does not exist")
+        VStack(spacing: 0) {
+            Group {
+                switch selectedTab {
+                case "Home":
+                    HomeView()
+                        .environmentObject(userModel)
+                case "Diet":
+                    DietView()
+                case "Profile":
+                    ProfileView()
+                default:
+                    Text("Selection does not exist")
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
+            Divider()
 
             HStack {
                 TabBarButton(icon: "house.fill", label: "Home", selectedTab: $selectedTab)
@@ -54,11 +60,7 @@ struct TabBarButton: View {
                     .font(.caption)
                     .foregroundColor(selectedTab == label ? .white : .gray)
             }
+            .frame(maxWidth: .infinity)
         }
-        .padding(.horizontal, 30)
     }
 }
-
-
-
-

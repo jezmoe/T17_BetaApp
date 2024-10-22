@@ -5,13 +5,16 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-// Profile page
 import SwiftUI
 
 struct ProfileView: View {
     var body: some View {
-        Text("Profile Page")
-            .navigationTitle("Profile")
+        VStack {
+            Text("Profile Page")
+                .font(.title)
+                .padding()
+            Spacer()
+        }
     }
 }
 

@@ -5,10 +5,11 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-//Starting page after splash screen, calls for user input
+// Starting page after splash screen, calls for user input
 import SwiftUI
 
 struct UserInfoInputView: View {
+    @EnvironmentObject var userModel: UserModel
     @State private var firstName: String = ""
     @State private var lastName: String = ""
     @State private var gender: String = "Male"
@@ -56,12 +57,14 @@ struct UserInfoInputView: View {
                     .padding()
 
                     Button("Continue", action: {
+                        userModel.firstName = firstName
+                        userModel.lastName = lastName
                         shouldShowWelcome = true
                     })
                     .buttonStyle(PrimaryButtonStyle())
                     .padding(.horizontal)
                     
-                    NavigationLink(destination: WelcomeSplashView(firstName: firstName, lastName: lastName), isActive: $shouldShowWelcome) {
+                    NavigationLink(destination: WelcomeSplashView().environmentObject(userModel), isActive: $shouldShowWelcome) {
                         EmptyView()
                     }
                 }
@@ -116,10 +119,8 @@ struct PrimaryButtonStyle: ButtonStyle {
     }
 }
 
-
-
 struct UserInfoInputView_Previews: PreviewProvider {
     static var previews: some View {
-        UserInfoInputView()
+        UserInfoInputView().environmentObject(UserModel())
     }
 }

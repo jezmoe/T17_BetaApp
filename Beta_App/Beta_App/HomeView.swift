@@ -5,20 +5,17 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-
 // Home View
 import SwiftUI
 
 struct HomeView: View {
-    var firstName: String
-    var lastName: String
-    @State private var selectedTab = "Home"
+    @EnvironmentObject var userModel: UserModel
 
     var body: some View {
         VStack {
             ScrollView {
                 VStack {
-                    Text("Welcome \(firstName) \(lastName) to Fitness Pro!")
+                    Text("Welcome \(userModel.firstName) \(userModel.lastName) to Fitness Pro!")
                         .font(.headline)
                         .padding()
 
@@ -26,25 +23,11 @@ struct HomeView: View {
                         CategoryCard(categoryName: "Beginner", description: "For beginners")
                         CategoryCard(categoryName: "Athlete", description: "3-5 months of experience")
                         CategoryCard(categoryName: "Bodybuilder", description: "1-2 years of experience")
-                        CategoryCard(categoryName: "Weekly Routine", description: "Beginner -2 years of experience")
+                        CategoryCard(categoryName: "Weekly Routine", description: "Beginner - 2 years of experience")
                         CategoryCard(categoryName: "Daily: Choose your Muscles", description: "Beginner - 2 Years of experience")
                     }
                 }
             }
-
-            // Tab Bar
-            HStack {
-                Spacer()
-                TabBarButton(icon: "house.fill", label: "Home", selectedTab: $selectedTab)
-                Spacer()
-                TabBarButton(icon: "chart.bar", label: "Diet", selectedTab: $selectedTab)
-                Spacer()
-                TabBarButton(icon: "person.fill", label: "Profile", selectedTab: $selectedTab)
-                Spacer()
-            }
-            .frame(height: 50)
-            .background(Color.black.opacity(0.8))
-            .foregroundColor(.white)
         }
     }
 }
@@ -82,12 +65,8 @@ struct CategoryCard: View {
     }
 }
 
-
-
-
-
-
-
-
-
-
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView().environmentObject(UserModel())
+    }
+}

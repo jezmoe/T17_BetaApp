@@ -5,29 +5,22 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-//pasa
-//test
-
-// Diet page
 import SwiftUI
 
 struct DietView: View {
     var body: some View {
-        NavigationView {
-            List {
-                Section(header: Text("Diet Plans")) {
-                    NavigationLink(destination: Text("Keto Diet Details")) {
-                        Text("Keto")
-                    }
-                    NavigationLink(destination: Text("Carnivore Diet Details")) {
-                        Text("Carnivore")
-                    }
-                    NavigationLink(destination: Text("Plant-Based Diet Details")) {
-                        Text("Plant-Based")
-                    }
+        VStack {
+            ScrollView {
+                VStack(spacing: 10) {
+                    Text("Diet Selection")
+                        .font(.headline)
+                        .padding()
+                    
+                    CategoryCard(categoryName: "Keto", description: "High-fat, low-carb diet")
+                    CategoryCard(categoryName: "Carnivore", description: "Meat-based diet")
+                    CategoryCard(categoryName: "Plant-Based", description: "Vegetarian diet")
                 }
             }
-            .navigationTitle("Diet Selection")
         }
     }
 }

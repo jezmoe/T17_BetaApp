@@ -9,15 +9,15 @@
 import SwiftUI
 
 struct WelcomeSplashView: View {
-    var firstName: String
-    var lastName: String
-    @State private var isActive = false 
+    @EnvironmentObject var userModel: UserModel
+    @State private var isActive = false
     @State private var hasAnimated = false
 
     var body: some View {
         VStack {
             if isActive {
-                HomeView(firstName: firstName, lastName: lastName)
+                ContentView()
+                    .environmentObject(userModel)
             } else {
                 ZStack {
                     Color.black.edgesIgnoringSafeArea(.all)
@@ -34,7 +34,7 @@ struct WelcomeSplashView: View {
                             }
                         }
 
-                    Text("Welcome \(firstName) \(lastName) to Fitness Pro!")
+                    Text("Welcome \(userModel.firstName) \(userModel.lastName) to Fitness Pro!")
                         .foregroundColor(.white)
                         .font(.title)
                         .multilineTextAlignment(.center)
@@ -56,8 +56,6 @@ struct WelcomeSplashView: View {
 
 struct WelcomeSplashView_Previews: PreviewProvider {
     static var previews: some View {
-        WelcomeSplashView(firstName: "Jan", lastName: "Rubido")
+        WelcomeSplashView().environmentObject(UserModel())
     }
 }
-
-
