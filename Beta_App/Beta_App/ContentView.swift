@@ -35,7 +35,7 @@ struct ContentView: View {
                 TabBarButton(icon: "leaf.fill", label: "Diet", selectedTab: $selectedTab)
                 TabBarButton(icon: "person.fill", label: "Profile", selectedTab: $selectedTab)
             }
-            .frame(height: 50)
+            .frame(height: 75)
             .background(Color.black.opacity(0.8))
             .foregroundColor(.white)
         }
