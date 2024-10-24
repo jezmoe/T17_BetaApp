@@ -5,7 +5,7 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-
+// Main Splash View
 import SwiftUI
 
 struct SplashView: View {

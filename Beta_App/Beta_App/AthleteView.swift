@@ -12,8 +12,9 @@ struct AthleteView: View {
     @EnvironmentObject var userModel: UserModel
     var body: some View {
         VStack {
-            Text("Welcome to the Athlete Course!")
-                .font(.title)
+            Text("Welcome to the Athlete Course! This course is designed for those with 3-5 months of weight training experience, looking to push themselves further and build on their foundational strength. This course is divided into 4 months. Good luck and keep pushing!")
+                .font(.subheadline)
+                .fontWeight(.light)
                 .padding()
 
             ForEach(1...4, id: \.self) { month in
@@ -47,5 +48,9 @@ struct AthleteView: View {
     }
 }
 
-
+struct AthleteView_Previews: PreviewProvider {
+    static var previews: some View {
+        AthleteView()
+    }
+}
 

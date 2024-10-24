@@ -15,7 +15,7 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Text("Welcome \(userModel.firstName) \(userModel.lastName) to Fitness Pro!")
+                Text("Hello \(userModel.firstName) \(userModel.lastName)!")
                     .font(.headline)
                     .padding()
 

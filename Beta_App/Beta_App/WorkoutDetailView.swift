@@ -5,7 +5,7 @@
 //  Created by Jan Rubido on 10/23/24.
 //
 
-// Controls the api for workouts. 
+// Controls the api for workouts. (Beginner/Athlete/Bodybuilder)
 import SwiftUI
 
 struct Workout: Codable, Identifiable {

@@ -13,8 +13,9 @@ struct BeginnerView: View {
 
     var body: some View {
         VStack {
-            Text("Welcome to the Beginner Course!")
-                .font(.title)
+            Text("Welcome to the Beginner Course! This course aims for those who are completely new to weightlifting or have taken a long break from it. This course is divided in 3 months. Good luck and let's get started!")
+                .font(.subheadline)
+                .fontWeight(.light)
                 .padding()
 
             ForEach(1...3, id: \.self) { month in
@@ -44,6 +45,12 @@ struct BeginnerView: View {
         default:
             return []
         }
+    }
+}
+
+struct BeginnerView_Previews: PreviewProvider {
+    static var previews: some View {
+        BeginnerView()
     }
 }
 

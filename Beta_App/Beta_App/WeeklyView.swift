@@ -134,3 +134,9 @@ struct WorkoutDictionaryView: View {
         .navigationTitle("Workout Dictionary")
     }
 }
+
+struct WeeklyView_Previews: PreviewProvider {
+    static var previews: some View {
+        WeeklyView()
+    }
+}
