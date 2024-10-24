@@ -6,6 +6,14 @@
 //
 
 // Starting page after splash screen, calls for user input
+//
+//  UserInfoInputView.swift
+//  Beta_App
+//
+//  Created by Jan Rubido on 10/21/24.
+//
+
+// Starting page after splash screen, calls for user input
 import SwiftUI
 
 struct UserInfoInputView: View {
@@ -64,6 +72,10 @@ struct UserInfoInputView: View {
                         Button("Continue", action: {
                             userModel.firstName = firstName
                             userModel.lastName = lastName
+                            userModel.gender = gender
+                            userModel.heightFeet = heightFeet
+                            userModel.heightInches = heightInches
+                            userModel.language = language
                             shouldShowWelcome = true
                         })
                         .buttonStyle(PrimaryButtonStyle())
@@ -80,7 +92,6 @@ struct UserInfoInputView: View {
         }
     }
 }
-
 
 struct GenderPicker: View {
     @Binding var gender: String
