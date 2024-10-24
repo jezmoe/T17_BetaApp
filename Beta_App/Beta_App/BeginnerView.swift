@@ -9,26 +9,29 @@
 import SwiftUI
 
 struct BeginnerView: View {
+    @EnvironmentObject var userModel: UserModel
+
     var body: some View {
         VStack {
-            Text("Welcome to the Beginner course!")
+            Text("Welcome to the Beginner Course!")
                 .font(.title)
                 .padding()
 
-            Text("This course is for those new or returning to fitness. It spans 3 months with progressively challenging routines.")
-                .padding()
-
-            Button("Start First Month") {
-                print("Beginner's First Month Started")
+            ForEach(1...3, id: \.self) { month in
+                NavigationLink(destination: WorkoutDetailView(focusArea: "Chest and Triceps", month: month, week: "1")) {
+                    Text("Start Month \(month)")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(10)
 
             Spacer()
         }
         .navigationTitle("Beginner Course")
     }
 }
+
 

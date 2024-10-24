@@ -16,8 +16,7 @@ struct ContentView: View {
             Group {
                 switch selectedTab {
                 case "Home":
-                    HomeView()
-                        .environmentObject(userModel)
+                    HomeView().environmentObject(userModel)
                 case "Diet":
                     DietView()
                 case "Profile":
@@ -27,7 +26,7 @@ struct ContentView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            
+
             Divider()
 
             HStack {
