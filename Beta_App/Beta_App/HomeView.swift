@@ -5,42 +5,42 @@
 //  Created by Jan Rubido on 10/21/24.
 //
 
-// Home View
+
 import SwiftUI
+
 
 struct HomeView: View {
     @EnvironmentObject var userModel: UserModel
 
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack {
-                    Text("Welcome \(userModel.firstName) \(userModel.lastName) to Fitness Pro!")
-                        .font(.headline)
-                        .padding()
+        ScrollView {
+            VStack {
+                Text("Welcome \(userModel.firstName) \(userModel.lastName) to Fitness Pro!")
+                    .font(.headline)
+                    .padding()
 
-                    VStack(spacing: 10) {
-                        NavigationLink(destination: BeginnerView()) {
-                            CategoryCard(categoryName: "Beginner", description: "For beginners")
-                        }
-                        NavigationLink(destination: AthleteView()) {
-                            CategoryCard(categoryName: "Athlete", description: "3-5 months of experience")
-                        }
-                        NavigationLink(destination: BodybuilderView()) {
-                            CategoryCard(categoryName: "Bodybuilder", description: "1-2 years of experience")
-                        }
-                        NavigationLink(destination: WeeklyView()) {
-                            CategoryCard(categoryName: "Weekly Routine", description: "Beginner - 2 years of experience")
-                        }
-                        NavigationLink(destination: DailyView()) {
-                            CategoryCard(categoryName: "Daily: Choose your Muscles", description: "Beginner - 2 Years of experience")
-                        }
+                VStack(spacing: 10) {
+                    NavigationLink(destination: BeginnerView()) {
+                        CategoryCard(categoryName: "Beginner", description: "For beginners")
+                    }
+                    NavigationLink(destination: AthleteView()) {
+                        CategoryCard(categoryName: "Athlete", description: "3-5 months of experience")
+                    }
+                    NavigationLink(destination: BodybuilderView()) {
+                        CategoryCard(categoryName: "Bodybuilder", description: "1-2 years of experience")
+                    }
+                    NavigationLink(destination: WeeklyView()) {
+                        CategoryCard(categoryName: "Weekly Routine", description: "Beginner - 2 years of experience")
+                    }
+                    NavigationLink(destination: DailyView()) {
+                        CategoryCard(categoryName: "Daily: Choose your Muscles", description: "Beginner - 2 Years of experience")
                     }
                 }
             }
         }
     }
 }
+
 
 
 struct CategoryCard: View {

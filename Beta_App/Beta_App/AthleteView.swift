@@ -9,26 +9,42 @@
 import SwiftUI
 
 struct AthleteView: View {
+    @EnvironmentObject var userModel: UserModel
+    @State private var selectedMonth: Int? = nil
+
     var body: some View {
         VStack {
-            Text("Welcome to the Athlete course!")
+            Text("Welcome to the Athlete Course!")
                 .font(.title)
                 .padding()
 
-            Text("Designed for those with 3-5 months experience, this course will push your limits over 4 months.")
+            ForEach(1...4, id: \.self) { month in
+                Button("Start Month \(month)") {
+                    selectedMonth = month
+                }
                 .padding()
-
-            Button("Start First Month") {
-                print("Athlete's First Month Started")
+                .background(Color.green)
+                .foregroundColor(.white)
+                .cornerRadius(10)
             }
-            .padding()
-            .background(Color.green)
-            .foregroundColor(.white)
-            .cornerRadius(10)
+
+            if let month = selectedMonth {
+                Text("Month \(month) Workout Plan")
+                    .font(.headline)
+                    .padding()
+
+                Text("Upcoming this week:")
+                    .font(.subheadline)
+                    .padding()
+
+                Text("Day 1: Agility\nDay 2: Power\nDay 3: Rest\nDay 4: Endurance")
+                    .padding()
+            }
 
             Spacer()
         }
         .navigationTitle("Athlete Course")
     }
 }
+
 
