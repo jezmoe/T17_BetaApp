@@ -21,6 +21,10 @@ struct UserInfoInputView: View {
     let feetRange = 4...7
     let inchesRange = 0...11
     let languages = ["English", "Spanish"]
+    
+    var isFormValid: Bool {
+        !firstName.isEmpty && !lastName.isEmpty
+    }
 
     var body: some View {
         NavigationView {
@@ -56,13 +60,15 @@ struct UserInfoInputView: View {
                     .pickerStyle(MenuPickerStyle())
                     .padding()
 
-                    Button("Continue", action: {
-                        userModel.firstName = firstName
-                        userModel.lastName = lastName
-                        shouldShowWelcome = true
-                    })
-                    .buttonStyle(PrimaryButtonStyle())
-                    .padding(.horizontal)
+                    if isFormValid {
+                        Button("Continue", action: {
+                            userModel.firstName = firstName
+                            userModel.lastName = lastName
+                            shouldShowWelcome = true
+                        })
+                        .buttonStyle(PrimaryButtonStyle())
+                        .padding(.horizontal)
+                    }
                     
                     NavigationLink(destination: WelcomeSplashView().environmentObject(userModel), isActive: $shouldShowWelcome) {
                         EmptyView()
@@ -74,6 +80,7 @@ struct UserInfoInputView: View {
         }
     }
 }
+
 
 struct GenderPicker: View {
     @Binding var gender: String
