@@ -10,8 +10,6 @@ import SwiftUI
 
 struct BodybuilderView: View {
     @EnvironmentObject var userModel: UserModel
-    @State private var selectedMonth: Int? = nil
-
     var body: some View {
         VStack {
             Text("Welcome to the Bodybuilder Course!")
@@ -19,32 +17,37 @@ struct BodybuilderView: View {
                 .padding()
 
             ForEach(1...5, id: \.self) { month in
-                Button("Start Month \(month)") {
-                    selectedMonth = month
+                NavigationLink(destination: WorkoutDetailView(focusArea: musclesForMonth(month), month: month)) {
+                    Text("Start Month \(month)")
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
                 }
-                .padding()
-                .background(Color.red)
-                .foregroundColor(.white)
-                .cornerRadius(10)
             }
-
-            if let month = selectedMonth {
-                Text("Month \(month) Workout Plan")
-                    .font(.headline)
-                    .padding()
-
-                Text("Upcoming this week:")
-                    .font(.subheadline)
-                    .padding()
-
-                Text("Day 1: Chest\nDay 2: Back\nDay 3: Rest\nDay 4: Legs\nDay 5: Arms")
-                    .padding()
-            }
-
             Spacer()
         }
         .navigationTitle("Bodybuilder Course")
     }
+
+    func musclesForMonth(_ month: Int) -> [String] {
+        switch month {
+        case 1:
+            return ["chest", "triceps"]
+        case 2:
+            return ["back", "biceps"]
+        case 3:
+            return ["quadriceps", "traps"]
+        case 4:
+            return ["chest", "triceps"]
+        case 5:
+            return ["chest", "triceps"] 
+        default:
+            return []
+        }
+    }
 }
+
 
 

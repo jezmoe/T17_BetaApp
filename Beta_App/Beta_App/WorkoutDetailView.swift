@@ -5,11 +5,11 @@
 //  Created by Jan Rubido on 10/23/24.
 //
 
-
+// Controls the api for workouts.
 import SwiftUI
 
 struct Workout: Codable, Identifiable {
-    var id: String { name }  // Using name as the unique ID
+    var id: String { name }
     let name: String
     let type: String
     let muscle: String
@@ -20,17 +20,23 @@ struct Workout: Codable, Identifiable {
 struct WorkoutDetailView: View {
     var focusArea: [String]
     var month: Int
-    var week: String
     @State private var workouts = [Workout]()
+    @State private var currentFocusArea: [String]
+
+    init(focusArea: [String], month: Int) {
+        self.focusArea = focusArea
+        self.month = month
+        _currentFocusArea = State(initialValue: focusArea)
+    }
 
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                Text("\(focusArea.joined(separator: " and ")): Month \(month), Week \(week)")
+                Text("\(currentFocusArea.joined(separator: " and ")): Month \(month)")
                     .font(.largeTitle)
                     .padding()
 
-                Text("Workouts today and estimated time to finish")
+                Text("Workouts today:")
                     .font(.title2)
                     .padding(.horizontal)
 
@@ -49,23 +55,29 @@ struct WorkoutDetailView: View {
             }
         }
         .onAppear {
-            loadWorkouts(for: focusArea)
+            loadWorkouts(for: currentFocusArea)
         }
     }
 
     var upcomingSessionsView: some View {
         VStack {
-            if month == 1 {
-                upcomingSessionLink(session: "Back and Biceps", days: "Tuesday, Friday", muscles: ["biceps", "middle_back"])
-                upcomingSessionLink(session: "Shoulders and Legs", days: "Wednesday, Saturday", muscles: ["quadriceps", "traps"])
+            if !currentFocusArea.contains("chest") && !currentFocusArea.contains("triceps") {
+                switchWeekButton(session: "Chest and Triceps", days: "Monday, Thursday", muscles: ["chest", "triceps"])
+            }
+            if !currentFocusArea.contains("biceps") && !currentFocusArea.contains("middle_back") {
+                switchWeekButton(session: "Back and Biceps", days: "Tuesday, Friday", muscles: ["biceps", "middle_back"])
+            }
+            if !currentFocusArea.contains("quadriceps") && !currentFocusArea.contains("traps") {
+                switchWeekButton(session: "Shoulders and Legs", days: "Wednesday, Saturday", muscles: ["quadriceps", "traps"])
             }
         }
     }
 
-    func upcomingSessionLink(session: String, days: String, muscles: [String]) -> some View {
+    func switchWeekButton(session: String, days: String, muscles: [String]) -> some View {
         Button(action: {
+            currentFocusArea = muscles
             loadWorkouts(for: muscles)
-            print("Starting \(session)")
+            print("Switched to \(session)")
         }) {
             HStack {
                 Spacer()
@@ -80,7 +92,7 @@ struct WorkoutDetailView: View {
     }
 
     func loadWorkouts(for muscles: [String]) {
-        workouts = [] // Clear existing workouts
+        workouts = []
         for muscle in muscles {
             guard let encodedMuscle = muscle.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
                   let url = URL(string: "https://api.api-ninjas.com/v1/exercises?muscle=\(encodedMuscle)") else {
@@ -111,9 +123,6 @@ struct WorkoutDetailView: View {
     }
 }
 
-struct WorkoutDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        WorkoutDetailView(focusArea: ["chest", "triceps"], month: 1, week: "1")
-    }
-}
+
+
 
