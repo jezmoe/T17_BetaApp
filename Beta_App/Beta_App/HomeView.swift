@@ -33,7 +33,7 @@ struct HomeView: View {
                         CategoryCard(categoryName: "Weekly Routine", description: "Beginner - 2 years of experience")
                     }
                     NavigationLink(destination: DailyView()) {
-                        CategoryCard(categoryName: "Daily: Choose your Muscles", description: "Beginner - 2 Years of experience")
+                        CategoryCard(categoryName: "Daily Workout", description: "Beginner - 2 Years of experience")
                     }
                 }
             }
