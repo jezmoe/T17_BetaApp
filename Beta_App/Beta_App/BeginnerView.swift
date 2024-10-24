@@ -10,7 +10,25 @@ import SwiftUI
 
 struct BeginnerView: View {
     var body: some View {
-        Text("Welcome to the Beginner Training Program!")
-            .navigationBarTitle("Beginner", displayMode: .inline)
+        VStack {
+            Text("Welcome to the Beginner course!")
+                .font(.title)
+                .padding()
+
+            Text("This course is for those new or returning to fitness. It spans 3 months with progressively challenging routines.")
+                .padding()
+
+            Button("Start First Month") {
+                print("Beginner's First Month Started")
+            }
+            .padding()
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+
+            Spacer()
+        }
+        .navigationTitle("Beginner Course")
     }
 }
+

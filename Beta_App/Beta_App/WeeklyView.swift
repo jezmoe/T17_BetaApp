@@ -10,7 +10,14 @@ import SwiftUI
 
 struct WeeklyView: View {
     var body: some View {
-        Text("Plan your week with our Weekly Routine Guide!")
-            .navigationBarTitle("Weekly Routine", displayMode: .inline)
+        List {
+            Section(header: Text("Weekly Routine")) {
+                ForEach(["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], id: \.self) { day in
+                    Text("\(day) - Update Routine")
+                }
+            }
+        }
+        .navigationTitle("Weekly Routine")
     }
 }
+

@@ -10,7 +10,25 @@ import SwiftUI
 
 struct BodybuilderView: View {
     var body: some View {
-        Text("Welcome to the Bodybuilder Training Program!")
-            .navigationBarTitle("Bodybuilder", displayMode: .inline)
+        VStack {
+            Text("Welcome to the Bodybuilder course!")
+                .font(.title)
+                .padding()
+
+            Text("Aimed at experienced lifters, this 6-month course will take your training to the next level.")
+                .padding()
+
+            Button("Start First Month") {
+                print("Bodybuilder's First Month Started")
+            }
+            .padding()
+            .background(Color.red)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+
+            Spacer()
+        }
+        .navigationTitle("Bodybuilder Course")
     }
 }
+

@@ -10,7 +10,25 @@ import SwiftUI
 
 struct DailyView: View {
     var body: some View {
-        Text("Choose your daily muscles to focus on!")
-            .navigationBarTitle("Daily Routine", displayMode: .inline)
+        VStack {
+            Text("Daily: Choose Your Muscles")
+                .font(.title)
+                .padding()
+
+            Text("Select and customize daily workouts based on the muscle groups you want to target.")
+                .padding()
+
+            Button("Configure Today's Workout") {
+                print("Daily Workout Configuration Started")
+            }
+            .padding()
+            .background(Color.orange)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+
+            Spacer()
+        }
+        .navigationTitle("Daily Workouts")
     }
 }
+
